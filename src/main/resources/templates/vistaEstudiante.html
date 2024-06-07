@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Información del Usuario y del Informe Saber Pro</title>
+    <meta charset="UTF-8"/>
+    <!-- Incluir Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('https://www.uao.edu.co/wp-content/uploads/2021/06/talleres-saber-pro-uao-2021.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+        }
+        .card-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 30px;
+        }
+        .card {
+            width: 48%;
+            margin-bottom: 20px;
+        }
+        .card-header {
+            background-color: #33A8FF;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+        .card-body {
+            padding: 20px;
+        }
+        .card-title {
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .user-details {
+            margin-bottom: 20px;
+        }
+        .user-details strong {
+            display: inline-block;
+            width: 150px;
+        }
+        .user-details span {
+            font-weight: bold;
+        }
+        .informe-details {
+            text-align:center;
+            margin-bottom: 20px;
+        }
+        .informe-details strong {
+            display: inline-block;
+            width: 250px;
+        }
+        .nivel-1 { background-color: #FF6347; } /* Rojo */
+        .nivel-2 { background-color: #87CEEB; } /* Amarillo */
+        .nivel-3 { background-color: #FFD700; } /* Verde */
+        .nivel-4 { background-color: #32CD32; } /* Azul */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="card-container">
+        <div class="card">
+            <div class="card-header">
+                Información del Usuario
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Detalles del Usuario</h5>
+                <div class="user-details" th:if="${usuario != null}">
+                    <p>
+                        <strong>Tipo de Documento:</strong> <span th:text="${usuario.tipoDocumento}"></span><br>
+                        <strong>Número de Documento:</strong> <span th:text="${usuario.numeroDocumento}"></span><br>
+                        <strong>Primer Apellido:</strong> <span th:text="${usuario.primerApellido}"></span><br>
+                        <strong>Segundo Apellido:</strong> <span th:text="${usuario.segundoApellido}"></span><br>
+                        <strong>Primer Nombre:</strong> <span th:text="${usuario.primerNombre}"></span><br>
+                        <strong>Segundo Nombre:</strong> <span th:text="${usuario.segundoNombre}"></span><br>
+                        <strong>Email:</strong> <span th:text="${usuario.email}"></span><br>
+                        <strong>Número Telefónico:</strong> <span th:text="${usuario.numeroTelefonico}"></span><br><br>
+                        <h3><strong class="text-info">Resultado:</strong><span th:text="${informe.resultadoTotal}"></span><br></h3>
+                    </p>
+                </div>
+                <h1 th:if="${usuario == null}">No hay datos disponibles</h1>
+                <button id="showInformeBtn" class="btn btn-primary">Ver Informe Extendido</button>
+                <a  class="btn btn-secondary btn-sm"  th:href="@{'/'}" >Cerrar Sesion</a>
+            </div>
+        </div>
+        <div id="informeCard" class="card hidden">
+            <div class="card-header">
+                Informe Saber Pro
+            </div>
+            <div class="card-body">
+                <div class="informe-details" th:if="${informe != null && usuario.estado.equals('Activo') }">
+                    <p>
+                        <strong>Número de Registro:</strong><br> <span th:text="${informe.numeroRegistro}"></span><br>
+                        <strong>Comunicación Escrita:</strong> <br><span th:text="${informe.resultadoComunicacion}"></span><br>
+                        <strong th:class="${'nivel-' + nivelService.determinarNivel(informe.resultadoComunicacion).toLowerCase()}"
+                                th:text="${'Nivel'+' '+nivelService.determinarNivel(informe.resultadoComunicacion)}"></strong><br>
+
+                        <strong>Razonamiento Cuantitativo:</strong><br> <span th:text="${informe.resultadoRazonamiento}"></span><br>
+                        <strong th:class="${'nivel-' + nivelService.determinarNivel(informe.resultadoRazonamiento).toLowerCase()}"
+                                th:text="${'Nivel'+' '+nivelService.determinarNivel(informe.resultadoRazonamiento)}"></strong><br>
+
+                        <strong>Lectura Crítica:</strong><br> <span th:text="${informe.resultadoLectura}"></span><br>
+                        <strong th:class="${'nivel-' + nivelService.determinarNivel(informe.resultadoLectura).toLowerCase()}"
+                                th:text="${'Nivel'+' '+nivelService.determinarNivel(informe.resultadoLectura)}"></strong><br>
+
+                        <strong>Competencias Ciudadanas:</strong> <br><span th:text="${informe.resultadoCiudadanas}"></span><br>
+                        <strong th:class="${'nivel-' + nivelService.determinarNivel(informe.resultadoCiudadanas).toLowerCase()}"
+                                th:text="${'Nivel'+' '+nivelService.determinarNivel(informe.resultadoCiudadanas)}"></strong><br>
+
+                        <strong>Resultado Inglés:</strong><br> <span th:text="${informe.resultadoIngles}"></span><br>
+                        <strong th:class="${'nivel-' + nivelService.determinarNivel(informe.resultadoIngles).toLowerCase()}"
+                                th:text="${'Nivel'+' '+nivelService.determinarNivel(informe.resultadoIngles)}"></strong><br>
+
+                        <strong> Formulación de Proyectos:</strong><br> <span th:text="${informe.resultadoFormulacion}"></span><br>
+                        <strong th:class="${'nivel-' + nivelService.determinarNivel(informe.resultadoFormulacion).toLowerCase()}"
+                                th:text="${'Nivel'+' '+nivelService.determinarNivel(informe.resultadoFormulacion)}"></strong><br>
+
+                        <strong>Pensamiento Científico:</strong><br> <span th:text="${informe.resultadoPensamiento}"></span><br>
+                        <strong th:class="${'nivel-' + nivelService.determinarNivel(informe.resultadoPensamiento).toLowerCase()}"
+                                th:text="${'Nivel'+' '+nivelService.determinarNivel(informe.resultadoPensamiento)}"></strong><br>
+
+                        <strong>Diseño de Software:</strong><br> <span th:text="${informe.resultadoSoftware}"></span><br>
+                        <strong th:class="${'nivel-' + nivelService.determinarNivel(informe.resultadoSoftware).toLowerCase()}"
+                                th:text="${'Nivel'+' '+nivelService.determinarNivel(informe.resultadoSoftware)}"></strong><br>
+
+                        <strong>Resultado Total:</strong><br> <span th:text="${informe.resultadoTotal}"></span><br>
+
+                        <strong th:class="${'nivel-' + nivelService.determinarNivel(informe.resultadoTotal).toLowerCase()}"
+                                th:text="${'Nivel'+' '+nivelService.determinarNivel(informe.resultadoTotal)}"></strong><br>
+
+                        <strong>Nivel Ingles:</strong><br> <span th:text="${informe.nivelIngles}"></span><br>
+                    </p>
+                </div>
+                <h1 th:if="${informe == null && usuario.estado.equals('Activo') }">No hay datos disponibles</h1>
+                <h1 th:if="${informe == null ||informe != null && usuario.estado.equals('Anulado')}">Se encuenta anulado: Por no asistir a su prueba</h1>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#showInformeBtn").click(function() {
+            $("#informeCard").removeClass("hidden");
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Login</title>
+  <meta charset="UTF-8"/>
+  <!-- Incluir Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/styles/login.css">
+  
+ 
+  
+</head>
+<body>
+	<div id="contenedor">
+
+		<nav id="barra-menu">
+			<input type="checkbox" id="check"> <label for="check"
+				class="checkbtn"> <img src="../svg/bars-solid.svg"
+				height="20px">
+			</label> <a href="#contenedor" class="enlace"> <img src="../img/logo.PNG"
+				alt="" class="logo">
+			</a>
+			<ul>
+				<li><a href="../index.html">Inicio</a></li>
+				<li><a href="../pages/catalogo.html">Catálogo</a></li>
+				<li><a href="../pages/pagos.html">Pagos</a></li>
+				<li><a href="../pages/preguntas.html">Preguntas</a></li>
+				<li><a href="../pages/privacidad.html">Privacidad</a></li>
+				<li><a href="../pages/contacto.html">Contacto</a></li>
+				<li><a class="active" href="../pages/login.html">Portal</a></li>
+			</ul>
+		</nav>
+
+
+		<div id="contenido">
+			<aside>
+				<div class="seccion-formulario" id="contactoyformulario">
+					<form action="/login" method="post" class="formulario">
+						<h3>INICIAR SESIÓN</h3>
+						<fieldset>
+							<legend>Ingrese su usuario y contraseña</legend>
+							<p>
+								<label for="numeroDocumento" class="textos">Usuario*:</label> <input
+									type="text" name="numeroDocumento" id="texto-usuario"
+									th:value="${param.numeroDocumento}" required> <label
+									for="password" class="textos">Contraseña*:</label> <input
+									type="password" name="password" id="texto-contraseña" required>
+							</p>
+						</fieldset>
+
+						<input class="boton-enviar" type="submit" value="Ingresar!" />
+						<div class="texto-final">
+							<p>
+								<a href="">Registrate Aquí</a>
+							</p>
+						</div>
+						<div th:if="${error}" class="error">
+							<p th:text="${error}"></p>
+						</div>
+					</form>
+				</div>
+			</aside>
+
+		</div>
+
+
+
+		<footer>
+			<div class="container-subir">
+				<a href="#barra-menu" class="btn-mas">⬆</a>
+			</div>
+
+			<div class="listas-footer">
+				<div id="lista1" class="footer-logo">
+					<ul>
+						<li><img src="../img/logo.PNG" alt="" class="logo"></li>
+					</ul>
+				</div>
+				<hr>
+				<div id="lista2" class="footer-secciones">
+					<h2>
+						<label>Secciones</label>
+					</h2>
+					<ul>
+						<li><a href="../index.html" class="footer-enlace">Inicio</a></li>
+						<li><a href="../pages/catalogo.html" class="footer-enlace">Catalogo</a></li>
+						<li><a href="../pages/pagos.html" class="footer-enlace">Pagos</a></li>
+					</ul>
+				</div>
+				<hr>
+				<div id="lista3" class="footer-pinturas">
+					<h2>
+						<label>Pinturas</label>
+					</h2>
+					<ul>
+						<li><a href="../pages/catalogo.html" class="footer-enlace">Ultimas
+								Pinturas</a></li>
+						<li><a href="../pages/catalogo.html" class="footer-enlace">Creaciones
+								del Taller</a></li>
+						<li><a href="../pages/catalogo.html" class="footer-enlace">Ver
+								todas</a></li>
+					</ul>
+				</div>
+				<hr>
+				<div id="lista4" class="footer-nosotros">
+					<h2>
+						<label>Nosotros</label>
+					</h2>
+					<ul>
+						<li><a href="../pages/preguntas.html" class="footer-enlace">Preguntas
+								Frecuentes</a></li>
+						<li><a href="../pages/privacidad.html" class="footer-enlace">Política
+								de Privacidad</a></li>
+						<li><a href="../pages/contacto.html" class="footer-enlace">Contacto</a></li>
+					</ul>
+				</div>
+
+				<div id="lista5" class="footer-siganos"></div>
+			</div>
+			<hr>
+			<div class="final">
+				<h6>
+					© 2023 Stars - Tienda y escuela de arte. Todos los derechos
+					reservados. | Este es sitio es una creación de Marlon Calderón.
+					</h4>
+					<h6>
+						<a href="../pages/privacidad.html">Política de Privacidad</a>
+						</h4>
+						<h6>
+							<a href="../pages/preguntas.html">Preguntas Frecuentes</a>
+							</h4>
+							<h6>
+								<a
+									href="https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=4276">Ley
+									527 de 1999</a>
+								</h4>
+								<h6>
+									<a
+										href="https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=44306">Ley
+										1480 de 2011</a>
+									</h4>
+									<h6>
+										<a
+											href="https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=49981">Ley
+											1581 de 2012</a>
+										</h4>
+			</div>
+		</footer>
+
+
+	</div>
+
+
+
+
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
